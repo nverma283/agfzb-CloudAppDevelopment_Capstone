@@ -96,7 +96,7 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
-        url = 'https://us-south.functions.appdomain.cloud/api/v1/web/e12be588-de16-4d83-9e76-4f0c9b8d0a2c/default/get-dealership'
+        url = 'https://us-south.functions.appdomain.cloud/dealerships/dealer-get'
         # Get dealers from the URL
         context = {"dealerships": restapis.get_dealers_from_cf(url)}
         # Concat all dealer's short name
