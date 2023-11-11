@@ -96,7 +96,7 @@ def registration_request(request):
 def get_dealerships(request):
     context = {}
     if request.method == "GET":
-        url = ''
+        url = 'https://us-south.functions.appdomain.cloud/api/v1/web/e12be588-de16-4d83-9e76-4f0c9b8d0a2c/default/get-dealership'
         # Get dealers from the URL
         context = {"dealerships": restapis.get_dealers_from_cf(url)}
         # Concat all dealer's short name
@@ -108,7 +108,7 @@ def get_dealerships(request):
 def get_dealer_details(request, dealer_id):
     context = {}
     if request.method == "GET":
-        url = ''
+        url = 'https://us-south.functions.appdomain.cloud/api/v1/web/e12be588-de16-4d83-9e76-4f0c9b8d0a2c/default/get-dealership'
         context = {"reviews":  restapis.get_dealer_reviews_by_id_from_cf(url, dealer_id)}
         return render(request, 'djangoapp/dealer_details.html', context)
 
@@ -116,7 +116,7 @@ def get_dealer_details(request, dealer_id):
 def add_review(request, dealer_id):
     if request.method == "GET":
         dealersid = dealer_id
-        url = "".format(dealersid)
+        url = "https://11de6231-76da-4c7d-8f14-6490dfe07a74-bluemix.cloudantnosqldb.appdomain.cloud".format(dealersid)
         # Get dealers from the URL
         context = {
             "cars": models.CarModel.objects.all(),
@@ -140,7 +140,7 @@ def add_review(request, dealer_id):
                 review["car_year"]= car.year.strftime("%Y")
             json_payload = {"review": review}
             print (json_payload)
-            url = ""
+            url = "https://11de6231-76da-4c7d-8f14-6490dfe07a74-bluemix.cloudantnosqldb.appdomain.cloud"
             restapis.post_request(url, json_payload, dealerId=dealer_id)
             return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
         else:
